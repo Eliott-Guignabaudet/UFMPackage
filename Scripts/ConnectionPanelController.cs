@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
@@ -13,6 +15,7 @@ public class ConnectionPanelController : MonoBehaviour
 
     public Button ConnectButton;
     // Start is called before the first frame update
+    private readonly ConcurrentQueue<Action> _actions = new ConcurrentQueue<Action>();
     void Start()
     {
         ConnectButton.onClick.AddListener(ClientConnection);
@@ -21,18 +24,18 @@ public class ConnectionPanelController : MonoBehaviour
         {
             Debug.Log("Client started");
         };
-        
-        NetworkManager.Singleton.OnClientConnectedCallback += obj =>
-        {
-            Debug.Log("Client Connected \nLoad scene Gameplay");
-            LoadSceneRpc();
-        };
+
+        NetworkManager.Singleton.OnClientConnectedCallback += obj =>  OnCientConnected(obj);
+
     }
 
-    [Rpc(SendTo.Server)]
-    private void LoadSceneRpc()
+    private void OnCientConnected(ulong obj)
     {
-        NetworkManager.Singleton.SceneManager.LoadScene("GameplayScene", LoadSceneMode.Single);
+        _actions.Enqueue(() =>
+        {
+            Debug.Log("Client Connected \nLoad scene Gameplay");
+            NetworkManager.Singleton.SceneManager.LoadScene("GameplayScene", LoadSceneMode.Single);
+        });
     }
 
     private void ClientConnection()
@@ -43,5 +46,16 @@ public class ConnectionPanelController : MonoBehaviour
         Debug.Log("Try launch connection on address: " + address +":" + 7777);
         
         NetworkManager.Singleton.StartClient();
+    }
+
+    private void Update()
+    {
+        while(_actions.Count > 0)
+        {
+            if(_actions.TryDequeue(out var action))
+            {
+                action?.Invoke();
+            }
+        }
     }
 }

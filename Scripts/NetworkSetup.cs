@@ -22,6 +22,8 @@ public class NetworkSetup : MonoBehaviour
     {
         NetworkManager.Singleton.OnServerStarted += () => Debug.Log("Server Started");
         NetworkManager.Singleton.StartServer();
+        //NetworkManager.Singleton.SceneManager.LoadScene("GameplayScene", LoadSceneMode.Additive);
+        NetworkManager.Singleton.SceneManager.LoadScene("DedicatedServerScene", LoadSceneMode.Single);
     }
 
     private void LoadSceneClient()

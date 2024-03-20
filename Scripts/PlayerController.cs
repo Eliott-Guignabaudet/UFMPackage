@@ -5,21 +5,17 @@ using UnityEngine;
 
 public class PlayerController : NetworkBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [Rpc(SendTo.Server)]
+    private void OnClientSpawnRpc()
     {
-        
+        Debug.Log("Client Spawned");
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        
+        if (IsLocalPlayer)
+        {
+            OnClientSpawnRpc();
+        }
     }
 }
