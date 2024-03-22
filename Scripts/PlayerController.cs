@@ -12,12 +12,20 @@ public class PlayerController : NetworkBehaviour
     public Vector2 InputDirection = new Vector2();
     public InputActionAsset InputAssets;
 
+    public GameObject PlayerCamera;
+    public GameObject VCam;
     public NetworkVariable<Vector3> Position = new NetworkVariable<Vector3>();
+    private NetworkVariable<Vector3> LocalPlayerPosition = new NetworkVariable<Vector3>();
+
+    private void Update()
+    {
+    }
+
     private void FixedUpdate()
     {
         if (IsLocalPlayer)
         {
-            MoveRpc(InputDirection);
+            MoveServerRpc(InputDirection);
         }
 
         if (IsServer)
@@ -29,18 +37,20 @@ public class PlayerController : NetworkBehaviour
     [Rpc(SendTo.Server)]
     private void OnClientSpawnRpc()
     {
-        Debug.Log("Client Spawned");
+        Position.Value = GameManager.Instance.PlayerSpawnPosition.position;
     }
 
     [Rpc(SendTo.Server)]
-    private void MoveRpc(Vector2 inputDirection)
+    private void MoveServerRpc(Vector2 inputDirection)
     {
         var position = transform.position;
         inputDirection.Normalize();
-        position.x += inputDirection.x * 10 * NetworkManager.ServerTime.FixedDeltaTime;
-        position.z += inputDirection.y * 10 * NetworkManager.ServerTime.FixedDeltaTime;
+        position.x += inputDirection.x * 40 * NetworkManager.ServerTime.FixedDeltaTime;
+        position.z += inputDirection.y * 40 * NetworkManager.ServerTime.FixedDeltaTime;
         Position.Value = position;
     }
+
+
     
     public override void OnNetworkSpawn()
     {
@@ -54,7 +64,8 @@ public class PlayerController : NetworkBehaviour
             moveAction.started += context =>InputDirection = context.ReadValue<Vector2>();
             moveAction.performed += context => InputDirection = context.ReadValue<Vector2>();
             moveAction.canceled += context => InputDirection = context.ReadValue<Vector2>();
-            
+            PlayerCamera.SetActive(true);
+            VCam.SetActive(true);
         }
     }
 }

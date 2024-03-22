@@ -11,7 +11,13 @@ public class NetworkSetup : MonoBehaviour
     {
 #if UNITY_SERVER
         StartServer(); 
-
+        NetworkManager.Singleton.OnClientConnectedCallback += obj =>
+        {
+            foreach (var id in NetworkManager.Singleton.ConnectedClientsIds)
+            {
+                Debug.Log(id);
+            }
+        };
 #else
         LoadSceneClient();
 #endif

@@ -446,6 +446,84 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1001 &3866140817840713596
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2212675458859810686, guid: d76c1b1fba9d5214192ce20a3a64cc40,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2212675458859810686, guid: d76c1b1fba9d5214192ce20a3a64cc40,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2212675458859810686, guid: d76c1b1fba9d5214192ce20a3a64cc40,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2212675458859810686, guid: d76c1b1fba9d5214192ce20a3a64cc40,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2212675458859810686, guid: d76c1b1fba9d5214192ce20a3a64cc40,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2212675458859810686, guid: d76c1b1fba9d5214192ce20a3a64cc40,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2212675458859810686, guid: d76c1b1fba9d5214192ce20a3a64cc40,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2212675458859810686, guid: d76c1b1fba9d5214192ce20a3a64cc40,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2212675458859810686, guid: d76c1b1fba9d5214192ce20a3a64cc40,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2212675458859810686, guid: d76c1b1fba9d5214192ce20a3a64cc40,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504963041640532298, guid: d76c1b1fba9d5214192ce20a3a64cc40,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3870318641
+      objectReference: {fileID: 0}
+    - target: {fileID: 7504963041640532298, guid: d76c1b1fba9d5214192ce20a3a64cc40,
+        type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2424254108
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092392725884240855, guid: d76c1b1fba9d5214192ce20a3a64cc40,
+        type: 3}
+      propertyPath: m_Name
+      value: Zombi
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d76c1b1fba9d5214192ce20a3a64cc40, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -453,3 +531,4 @@ SceneRoots:
   - {fileID: 1973953035}
   - {fileID: 1984652065}
   - {fileID: 681438221}
+  - {fileID: 3866140817840713596}
