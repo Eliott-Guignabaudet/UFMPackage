@@ -70,7 +70,6 @@ public class PlayerController : NetworkBehaviour
     {
         if (isShooting)
         {
-            Debug.Log("Fire!");
             var instance = Instantiate(ProjectilePrefab, transform.position + transform.forward , transform.rotation);
             var instanceNetworkObject = instance.GetComponent<NetworkObject>();
             instanceNetworkObject.Spawn();

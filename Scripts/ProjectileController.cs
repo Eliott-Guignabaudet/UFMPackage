@@ -15,4 +15,14 @@ public class ProjectileController : NetworkBehaviour
             transform.position += transform.forward * speed * NetworkManager.Singleton.ServerTime.FixedDeltaTime;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        var zombi = other.GetComponent<ZombiController>();
+        if (IsServer && zombi != null)
+        {
+            zombi.TakeDamageRpc(2);
+            this.NetworkObject.Despawn();
+        }
+    }
 }

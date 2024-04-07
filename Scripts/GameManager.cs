@@ -3,10 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     public Transform PlayerSpawnPosition;
+    public Transform[] ZombiSpawners;
+    public GameObject ZombiPrefab;
+    public float ZombiSpawnCoolDown;
+    private float _timeElpasedSinceLastZombiSpawn;
     
     private static GameManager _instance;
 
@@ -30,6 +35,24 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
-    
+
+    private void Update()
+    {
+        if (IsServer)
+        {
+            ManageZombiSpawnRpc();
+        }
+    }
+    [Rpc(SendTo.Server)]
+    private void ManageZombiSpawnRpc()
+    {
+        _timeElpasedSinceLastZombiSpawn += Time.deltaTime;
+        if (_timeElpasedSinceLastZombiSpawn >= ZombiSpawnCoolDown / NetworkManager.Singleton.ConnectedClientsList.Count)
+        {
+            int spawnerIndex = Random.Range(0, ZombiSpawners.Length);
+            var zombi = Instantiate(ZombiPrefab, ZombiSpawners[spawnerIndex]);
+            zombi.GetComponent<NetworkObject>().Spawn();
+            _timeElpasedSinceLastZombiSpawn = 0;
+        }
+    }
 }
