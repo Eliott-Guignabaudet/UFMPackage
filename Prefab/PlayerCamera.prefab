@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1826652310409298780}
   - component: {fileID: 4297278458745471371}
   - component: {fileID: 6300190661097808532}
-  - component: {fileID: 3225908447992768838}
+  - component: {fileID: 7603479957109703248}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: Untagged
@@ -138,7 +138,7 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!114 &3225908447992768838
+--- !u!114 &7603479957109703248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
